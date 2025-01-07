@@ -100,7 +100,7 @@ The application's configuration is handled in the `application.properties` file.
        "response": "Test Response",
         "statusCode": 200
        }
-``
+       ```
     *   Example Response:
        ```json
         {
@@ -114,7 +114,7 @@ The application's configuration is handled in the `application.properties` file.
           "delay": null,
          "responseHeaders": null
          }
-        ```
+    ```
     *  Note the port is 8085.
 
 #### Mock Controller (`MockController`)
