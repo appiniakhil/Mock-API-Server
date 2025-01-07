@@ -122,7 +122,7 @@ The application's configuration is handled in the `application.properties` file.
 -   **`ANY /<any-path>`**:
     *   This is the main entrypoint for all mock requests, it will use the corresponding config to generate a response.
     *   The application will check database for the configuration that matches the url.
-    *   You can use any HTTP method (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`).
+    *   You can use any HTTP method (`GET`, `POST`, `PUT`, `DELETE`, `UPDATE`).
     *   The response and response code is derived from the configuration.
     *  Example response
           * `GET http://localhost:8085/api/test2334`
