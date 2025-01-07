@@ -89,6 +89,7 @@ The application's configuration is handled in the `application.properties` file.
 -   **`POST /api/mock/config`**:
     *   Creates a new mock configuration.
     *   Requires a JSON payload representing the configuration. Example:
+      
        ```json
       {
        "name": "my-mock-config",
@@ -129,40 +130,6 @@ The application's configuration is handled in the `application.properties` file.
     *   Returns the configured response with the configured status code and content type.
     *   Note the port is 8085.
 
-### Usage Examples
-
-1.  **Configure a mock endpoint:**
-
-    ```bash
-      curl -X POST \
-         -H "Content-Type: application/json" \
-         -d '{
-          "name": "my-mock-config",
-          "uriPath": "/api/test2334",
-          "method": "GET",
-          "requestBody": null,
-          "responseBody": "appini akhil",
-         "response": "Test Response",
-          "statusCode": 200
-        }' \
-      http://localhost:8085/api/mock/config
-    ```
-
-2.  **Access the mock endpoint:**
-
-    ```bash
-        curl http://localhost:8085/api/test2334
-    ```
-    The above command will return the string `"appini akhil"` with a 200 status code.
-
-3.  **Login endpoint**
-    ```bash
-       curl -X POST \
-           -H "Content-Type: application/json" \
-           -d '{"tenantId": "1234"}' \
-            http://localhost:8085/api/auth/login
-    ```
-    The above command will return a jwt token associated with the tenant id.
 
 ## Technologies Used
 
