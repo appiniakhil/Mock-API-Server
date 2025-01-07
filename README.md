@@ -73,15 +73,16 @@ The application's configuration is handled in the `application.properties` file.
     *   Requires a JSON payload like:
         ```json
         {
-          "tenantId": "your_tenant_id"
+          "tenantId": "1234"
         }
         ```
-    *   Returns:
+    *   Example Response:
         ```json
           {
-           "token": "your_jwt_token"
+           "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxMjM0IiwiaWF0IjoxNzM2MjcyNDEwLCJleHAiOjE3MzcxMzY0MTB9.1wPznXw176kl9T7TOPATE-HvAmYOldyahBN4WxzwlrseqEChDcPKVSyX_XdEr-jUTF0V6PSsBeXWkqRNla4wGQ"
           }
         ```
+    *  Note the port is 8085.
 
 #### Configuration Controller (`ConfigurationController`)
 
@@ -89,16 +90,31 @@ The application's configuration is handled in the `application.properties` file.
     *   Creates a new mock configuration.
     *   Requires a JSON payload representing the configuration. Example:
        ```json
+      {
+       "name": "my-mock-config",
+       "uriPath": "/api/test2334",
+       "method": "GET",
+        "requestBody": null,
+        "responseBody": "appini akhil",
+       "response": "Test Response",
+        "statusCode": 200
+       }
+        ```
+    *   Example Response:
+       ```json
         {
-           "id": 1,
-           "name": "my-mock-config",
-            "baseUrl": "/api/test",
-            "method": "GET",
-             "response": "Test Response",
-           "statusCode": 200
+          "id": 5,
+          "tenantId": "1234",
+           "uriPath": "/api/test2334",
+           "method": "GET",
+           "requestBody": null,
+           "responseBody": "appini akhil",
+           "statusCode": 200,
+          "delay": null,
+         "responseHeaders": null
          }
         ```
-    *   Returns the created configuration.
+    *  Note the port is 8085.
 
 #### Mock Controller (`MockController`)
 
@@ -107,39 +123,44 @@ The application's configuration is handled in the `application.properties` file.
     *   The application will check database for the configuration that matches the url.
     *   You can use any HTTP method (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`).
     *   The response and response code is derived from the configuration.
+    *  Example response
+          * `GET http://localhost:8085/api/test2334`
+          * Example response `"appini akhil"`
     *   Returns the configured response with the configured status code and content type.
+    *   Note the port is 8085.
 
 ### Usage Examples
 
 1.  **Configure a mock endpoint:**
 
     ```bash
-     curl -X POST \
+      curl -X POST \
          -H "Content-Type: application/json" \
          -d '{
-           "id": 1,
-           "name": "test-mock",
-           "baseUrl": "/api/test",
-            "method": "GET",
-            "response": "Test Response",
-           "statusCode": 200
-         }' \
-         http://localhost:8080/api/mock/config
+          "name": "my-mock-config",
+          "uriPath": "/api/test2334",
+          "method": "GET",
+          "requestBody": null,
+          "responseBody": "appini akhil",
+         "response": "Test Response",
+          "statusCode": 200
+        }' \
+      http://localhost:8085/api/mock/config
     ```
 
 2.  **Access the mock endpoint:**
 
     ```bash
-        curl  http://localhost:8080/api/test
+        curl http://localhost:8085/api/test2334
     ```
-    The above command will return a status code of 200 and the following response `"Test Response"`.
+    The above command will return the string `"appini akhil"` with a 200 status code.
 
 3.  **Login endpoint**
     ```bash
        curl -X POST \
            -H "Content-Type: application/json" \
-           -d '{"tenantId": "test-tenant-id"}' \
-           http://localhost:8080/api/auth/login
+           -d '{"tenantId": "1234"}' \
+            http://localhost:8085/api/auth/login
     ```
     The above command will return a jwt token associated with the tenant id.
 
